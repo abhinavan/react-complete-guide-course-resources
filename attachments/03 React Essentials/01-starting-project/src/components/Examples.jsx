@@ -24,7 +24,6 @@ const Examples = () => {
     <Section id="examples" title="Examples">
       <h2>Examples</h2>
       <Tabs
-        ButtonComponents="menu"
         buttons={
           <>
             <TabButtons
