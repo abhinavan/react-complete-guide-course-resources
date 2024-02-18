@@ -1,15 +1,16 @@
-import "./css/CoreConcepts.css";
+import { CORE_CONCEPTS } from "../data";
+import CoreConcept from "./CoreConcept";
+import Section from "./Section";
 
-const CoreConcepts = ({ image, title, description }) => {
+const CoreConcepts = () => {
   return (
-    <div>
+    <Section id="core-concepts" title="Core Concepts">
       <ul>
-        <img src={image} alt="..."></img>
-        <h3>{title}</h3>
-        <p>{description}</p>
+        {CORE_CONCEPTS.map((concepts) => (
+          <CoreConcept {...concepts} />
+        ))}
       </ul>
-    </div>
+    </Section>
   );
 };
-
 export default CoreConcepts;
