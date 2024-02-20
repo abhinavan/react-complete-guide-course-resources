@@ -1,33 +1,17 @@
-import React, { useState } from "react";
-const initialGameBoard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-const GameBoard = ({ onSelectActivePlayer, activePlayer }) => {
-  const [currentGameBoard, setCurrentGameBoard] = useState(initialGameBoard);
-
-  const handleUpdateGameBoard = (rowIndex, columnIndex) => {
-    setCurrentGameBoard((prevGameBoard) => {
-      const updatedGameBoard = [
-        ...prevGameBoard.map((innerArray) => [...innerArray]),
-      ];
-      updatedGameBoard[rowIndex][columnIndex] = activePlayer;
-      onSelectActivePlayer();
-      return updatedGameBoard;
-    });
-  };
+import React from "react";
+const GameBoard = ({ onSelectActivePlayer, board }) => {
   return (
     <ol id="game-board">
-      {currentGameBoard.map((row, rowIndex) => (
+      {board.map((row, rowIndex) => (
         <li key={rowIndex}>
           <ol>
             {row.map((playerSymbol, columnIndex) => (
               <li key={columnIndex}>
                 <button
                   onClick={() => {
-                    handleUpdateGameBoard(rowIndex, columnIndex);
+                    onSelectActivePlayer(rowIndex, columnIndex);
                   }}
+                  disabled={playerSymbol != null}
                 >
                   {playerSymbol}
                 </button>
