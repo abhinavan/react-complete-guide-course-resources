@@ -1,5 +1,10 @@
 import { useState } from "react";
-const Player = ({ playerInitialName, playerSymbol }) => {
+const Player = ({
+  playerInitialName,
+  playerSymbol,
+  isActivePlayer,
+  onSelectPlayerName,
+}) => {
   let btnCaption = "Edit";
   const [isEditing, setIsEditing] = useState(false);
   const [playerName, setPlayerName] = useState(playerInitialName);
@@ -10,7 +15,10 @@ const Player = ({ playerInitialName, playerSymbol }) => {
     // Not recommended way of changing state value
     // setIsEditing(!isEditing);
   };
-  const handleChange = (event) => setPlayerName(event.target.value);
+  const handleChange = (event) => {
+    setPlayerName(event.target.value);
+    onSelectPlayerName(playerName);
+  };
   isEditing &&
     (playerInput = (
       <input type="text" onChange={handleChange} value={playerName}></input>
@@ -18,7 +26,7 @@ const Player = ({ playerInitialName, playerSymbol }) => {
     (btnCaption = "Save");
 
   return (
-    <li>
+    <li className={isActivePlayer ? "active" : undefined}>
       <span className="player">
         {playerInput}
         <span className="player-symbol">{playerSymbol}</span>
